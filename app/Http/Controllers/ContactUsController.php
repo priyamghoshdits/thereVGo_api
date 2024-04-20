@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\ContactU;
+use App\Contactuslead;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
 {
     public function get_contact_us()
     {
-        $contactUs = ContactU::get();
+        $contactUs = Contactuslead::get();
         return response()->json(['success'=>1, 'data'=>$contactUs], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function save_contact_us(Request $request)
     {
         $requestedData = (object)$request->json()->all();
-        $contactUs = new ContactU();
+        $contactUs = new Contactuslead();
         $contactUs->name = $requestedData->name;
         $contactUs->email = $requestedData->email;
         $contactUs->phone = $requestedData->phone;
@@ -29,7 +29,7 @@ class ContactUsController extends Controller
     public function update_contact_us(Request $request)
     {
         $requestedData = (object)$request->json()->all();
-        $contactUs = ContactU::find($requestedData->id);
+        $contactUs = Contactuslead::find($requestedData->id);
         $contactUs->name = $requestedData->name;
         $contactUs->email = $requestedData->email;
         $contactUs->phone = $requestedData->phone;
@@ -41,7 +41,7 @@ class ContactUsController extends Controller
 
     public function delete_contact_us($id)
     {
-        $contactUs = ContactU::find($id);
+        $contactUs = Contactuslead::find($id);
         $contactUs->delete();
         return response()->json(['success'=>1, 'data'=>$contactUs], 200,[],JSON_NUMERIC_CHECK);
     }
